@@ -1,0 +1,11 @@
+/**:
+  ros__parameters:
+    robot_description_kinematics:
+      ur_manipulator:
+        kinematics_solver: trac_ik_kinematics_plugin/TRAC_IKKinematicsPlugin
+        kinematics_solver_search_resolution: 0.0050000000000000001
+        kinematics_solver_timeout: 0.0050000000000000001
+        kinematics_solver_attempts: 3
+        max_cache_size: 100000
+        # min_pose_distance: 1
+        # min_joint_config_distance: 4
