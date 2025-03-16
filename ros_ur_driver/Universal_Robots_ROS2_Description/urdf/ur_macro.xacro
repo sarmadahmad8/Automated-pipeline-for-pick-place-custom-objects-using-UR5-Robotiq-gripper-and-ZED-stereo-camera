@@ -459,8 +459,8 @@
       <parent link="${tf_prefix}flange"/>
       <child link="${tf_prefix}tool0"/>
     </joint>
-    <!-- commented for project -->
-    <!-- <link name="virtual_jaw_edge"/>
+    <!-- custom accomodation for gripper -->
+    <link name="virtual_jaw_edge"/>
     <joint name="Virtual_jaw_joint" type="fixed">
         <parent link="${tf_prefix}tool0"/>
         <child link="virtual_jaw_edge"/>
@@ -472,7 +472,7 @@
         <parent link="${tf_prefix}wrist_2_link"/>
         <child link="virtual_camera"/>
         <origin xyz="-0.06 0.0158 0.079" rpy="0 0 0"/>
-    </joint> -->
+    </joint>
 
   </xacro:macro>
 </robot>
