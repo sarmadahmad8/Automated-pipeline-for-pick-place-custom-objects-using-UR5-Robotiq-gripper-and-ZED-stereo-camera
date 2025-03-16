@@ -1,10 +1,11 @@
 # INSTALLATION
-```mkdir ur5_ws
+```python
+mkdir ur5_ws
 cd ur5_ws
 git clone -b main https://github.com/sarmadahmad8/Automated-pipeline-for-fruit-plucking-using-UR5-Robotiq-gripper-and-ZED-stereo-camera.git
 colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
-source install/setup.bash```
-
+source install/setup.bash
+```
 # DEPENDENCIES
 ## ENVIRONMENT DEPENDENCIES
 Ubuntu 22.04\
