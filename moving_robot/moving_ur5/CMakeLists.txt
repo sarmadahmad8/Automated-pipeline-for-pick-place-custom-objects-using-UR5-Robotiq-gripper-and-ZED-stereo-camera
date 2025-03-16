@@ -23,19 +23,6 @@ find_package(control_msgs REQUIRED)
 find_package(ur_robot_driver REQUIRED)
 
 
-add_executable(move_group_interface_ur_manipulator src/move_group_demo.cpp)
-ament_target_dependencies(move_group_interface_ur_manipulator
-  rclcpp
-  moveit_core
-  moveit_ros_planning_interface
-  moveit_visual_tools
-  moveit_msgs
-  geometry_msgs
-  sensor_msgs
-  control_msgs
-  ur_robot_driver
-)
-
 add_executable(move_group_reciever src/move_group_reciever.cpp)
 ament_target_dependencies(move_group_reciever
   rclcpp
@@ -45,34 +32,6 @@ ament_target_dependencies(move_group_reciever
   moveit_msgs
   geometry_msgs
   std_msgs
-  sensor_msgs
-  control_msgs
-  ur_robot_driver
-)
-
-add_executable(data_collection_reciever src/DataCollectionReciever.cpp)
-ament_target_dependencies(data_collection_reciever
-  rclcpp
-  moveit_core
-  moveit_ros_planning_interface
-  moveit_visual_tools
-  moveit_msgs
-  geometry_msgs
-  std_msgs
-  sensor_msgs
-  control_msgs
-  ur_robot_driver
-)
-
-
-add_executable(move_group_publisher src/move_group_publisher.cpp)
-ament_target_dependencies(move_group_publisher
-  rclcpp
-  moveit_core
-  moveit_ros_planning_interface
-  moveit_visual_tools
-  moveit_msgs
-  geometry_msgs
   sensor_msgs
   control_msgs
   ur_robot_driver
@@ -91,7 +50,7 @@ ament_target_dependencies(move_realtime
   ur_robot_driver
 )
 
-install(TARGETS move_realtime move_group_publisher move_group_reciever data_collection_reciever move_group_interface_ur_manipulator
+install(TARGETS move_realtime move_group_reciever
   DESTINATION lib/${PROJECT_NAME}
 )
 
