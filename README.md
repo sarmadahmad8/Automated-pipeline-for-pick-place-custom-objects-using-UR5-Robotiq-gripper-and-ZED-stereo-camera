@@ -50,4 +50,8 @@ A demonstration node has been created for real time robot movement named ```move
 
 ## Troubleshooting
 ### Q. On running active node #1 the robot shows planned path but does not execute.
-A. In the moveit nodes rviz window (background node 2 rviz window). Go to panels and add 'moveit visual tools' panel. When prompted to 'press next in the rviz visual tools window' in the moveit terminal (background node 2 terminal window), press next to move the robot to the planned path. Always supervise the planned path before pressing `'Next'.
+A. In the moveit nodes rviz window (background node 2 rviz window). Go to panels and add 'moveit visual tools' panel. When prompted to 'press next in the rviz visual tools window' in the moveit terminal (background node 2 terminal window), press next to move the robot to the planned path. Always supervise the planned path before pressing `'Next'.\
+### Q. How do i add my custom roboflow model to this pipeline?
+A. Simply add you ```model_id``` and ```api_key``` of the roboflow project to the ```move_group_publisher.py``` in the ```detection_publisher_1/src/detection_publisher/detection_publisher``` folder under the header ```#Initialize the Roboflow model``` and rebuild.\
+### Q. I made changes to some code/ implemented a new function however its not working when running the nodes.
+A. Always rebuild the nodes when finalizing any new changes. Go to ```ur5_ws``` and enter ```colcon build``` and then ```source install/setup.bash```.
