@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>detection_publisher</name>
+  <name>detection_publishers</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="sarmadahmad8@todo.todo">sarmadahmad8</maintainer>
+  <maintainer email="sarmad.ahmed11@gmail.com">sarmadahmad8</maintainer>
   <license>TODO: License declaration</license>
 
   <depend>rclpy</depend>
-  <depend>geometry_msgs</epend>
+  <depend>geometry_msgs</depend>
   <depend>std_msgs</depend>
 
   <test_depend>ament_copyright</test_depend>

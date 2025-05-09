@@ -119,7 +119,7 @@ int main(int argc, char** argv)
     cylinder_primitive.type = primitive.CYLINDER;
     cylinder_primitive.dimensions.resize(2);
     cylinder_primitive.dimensions[primitive.CYLINDER_HEIGHT] = 0.25;
-    cylinder_primitive.dimensions[primitive.CYLINDER_RADIUS] = 0.06;
+    cylinder_primitive.dimensions[primitive.CYLINDER_RADIUS] = 0.08;
     object_to_attach.header.frame_id = move_group.getEndEffectorLink();
     geometry_msgs::msg::Pose grab_pose;
     grab_pose.orientation.w = 1.0;
@@ -171,8 +171,8 @@ int main(int argc, char** argv)
     current_state->copyJointGroupPositions(joint_model_group, joint_group_positions);
 
     joint_group_positions[0] = 1.571;
-    joint_group_positions[1] = -2.356;
-    joint_group_positions[2] = 2.356;
+    joint_group_positions[1] = -2.758;
+    joint_group_positions[2] = 2.758;
     joint_group_positions[3] = -3.141;
     joint_group_positions[4] = -1.553;
     joint_group_positions[5] = 0; // Modify this for UR robot
@@ -195,6 +195,14 @@ int main(int argc, char** argv)
     visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo");
 
     move_group.move();
+
+    const char*  command = "ros2 action send_goal -f /robotiq_2f_urcap_adapter/gripper_command robotiq_2f_urcap_adapter/GripperCommand '{ command: { position: 0.060, max_effort: 140, max_speed: 0.05 }}'";
+    int result = system(command);
+    if (result == 0) {
+        std::cout << "Command executed successfully." << std::endl;
+    } else {
+        std::cout << "Command execution failed." << std::endl;
+    }
 
     moveit_msgs::msg::OrientationConstraint ocm;
     ocm.link_name = "wrist_2_link";
@@ -220,8 +228,8 @@ int main(int argc, char** argv)
         current_state->copyJointGroupPositions(joint_model_group, joint_group_positions);
     
         joint_group_positions[0] = 1.571;
-        joint_group_positions[1] = -2.356;
-        joint_group_positions[2] = 2.356;
+        joint_group_positions[1] = -2.758;
+        joint_group_positions[2] = 2.758;
         joint_group_positions[3] = -3.141;
         joint_group_positions[4] = -1.553;
         joint_group_positions[5] = 0; // Modify this for UR robot
@@ -271,7 +279,7 @@ int main(int argc, char** argv)
         current_state = move_group.getCurrentState(10);
         current_state->copyJointGroupPositions(joint_model_group, joint_group_positions);
         geometry_msgs::msg::Pose target_pose2 = target_pose1;
-        target_pose2.position.y += 0.05;
+        target_pose2.position.y += 0.065;
         within_bounds = move_group.setJointValueTarget(target_pose2);
         if (!within_bounds)
         {
@@ -304,7 +312,7 @@ int main(int argc, char** argv)
 
         // Convert to a C-style string
         std::string command_close = command_stream.str();
-        int result = system(command_close.c_str());
+        result = system(command_close.c_str());
 
         if (result == 0) {
             std::cout << "Command executed successfully." << std::endl;
@@ -365,8 +373,8 @@ int main(int argc, char** argv)
         current_state->copyJointGroupPositions(joint_model_group, joint_group_positions);
 
         joint_group_positions[0] = 1.571;
-        joint_group_positions[1] = -2.356;
-        joint_group_positions[2] = 2.356;
+        joint_group_positions[1] = -2.758;
+        joint_group_positions[2] = 2.758;
         joint_group_positions[3] = -3.141;
         joint_group_positions[4] = -1.553;
         joint_group_positions[5] = 0; // Modify this for UR robot
@@ -390,7 +398,7 @@ int main(int argc, char** argv)
 
         move_group.move();
 
-        const char*  command = "ros2 action send_goal -f /robotiq_2f_urcap_adapter/gripper_command robotiq_2f_urcap_adapter/GripperCommand '{ command: { position: 0.083, max_effort: 140, max_speed: 0.05 }}'";
+        command = "ros2 action send_goal -f /robotiq_2f_urcap_adapter/gripper_command robotiq_2f_urcap_adapter/GripperCommand '{ command: { position: 0.060, max_effort: 140, max_speed: 0.05 }}'";
         result = system(command);
         if (result == 0) {
             std::cout << "Command executed successfully." << std::endl;
@@ -403,3 +411,213 @@ int main(int argc, char** argv)
     rclcpp::shutdown();
     return 0;
 }
+
+//        ***TEST FLUIDITY***    
+
+// geometry_msgs::msg::Pose target_pose1;
+//     target_pose1.position.x = -0.400;
+//     target_pose1.position.y = 0.546;
+//     target_pose1.position.z = 0.564;
+//     target_pose1.orientation.x = -0.706;
+//     target_pose1.orientation.y = 0.038;
+//     target_pose1.orientation.z = -0.012;
+//     target_pose1.orientation.w = 0.707;
+//     move_group.setPoseTarget(target_pose1);
+
+//     move_group.setMaxVelocityScalingFactor(0.1);
+//     move_group.setMaxAccelerationScalingFactor(0.1);
+//     // ** Cartesian Path**
+//     // std::vector<geometry_msgs::msg::Pose> waypoints;
+//     // waypoints.push_back(target_pose1);
+
+//     // geometry_msgs::msg::Pose target_pose3 = target_pose1;
+
+//     // moveit_msgs::msg::RobotTrajectory trajectory;
+//     // const double jump_threshold = 0.0;
+//     // const double eef_step = 0.05;
+//     // double fraction = move_group.computeCartesianPath(waypoints, eef_step, jump_threshold, trajectory,true);
+//     // RCLCPP_INFO(LOGGER, "Visualizing plan 4 (Cartesian path) (%.2f%% achieved)", fraction * 100.0);
+
+//     // visual_tools.deleteAllMarkers();
+//     // visual_tools.publishText(text_pose, "Cartesian_Path", rvt::WHITE, rvt::XLARGE);
+//     // visual_tools.publishPath(waypoints, rvt::LIME_GREEN, rvt::SMALL);
+//     // for (std::size_t i = 0; i < waypoints.size(); ++i)
+//     //     visual_tools.publishAxisLabeled(waypoints[i], "pt" + std::to_string(i), rvt::SMALL);
+//     // visual_tools.trigger();
+//     // visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo");
+//     // move_group.execute(trajectory); 
+
+//     // Plan and visualize
+//     RCLCPP_INFO(LOGGER, "Planning frame: %s", move_group.getPlanningFrame().c_str());
+//     success = (move_group.plan(my_plan) == moveit::core::MoveItErrorCode::SUCCESS);
+//     RCLCPP_INFO(LOGGER, "Visualizing plan (pose goal) %s", success ? "" : "FAILED");
+
+//     visual_tools.publishAxisLabeled(target_pose1, "pose1");
+//     visual_tools.publishText(text_pose, "Pose Goal", rvt::WHITE, rvt::XLARGE);
+//     visual_tools.publishTrajectoryLine(my_plan.trajectory_, joint_model_group);
+//     visual_tools.trigger();
+//     //visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo");
+
+//     move_group.move();
+
+//     current_state = move_group.getCurrentState(10);
+//     current_state->copyJointGroupPositions(joint_model_group, joint_group_positions);
+
+//     joint_group_positions[0] = 1.536;
+//     joint_group_positions[1] = -2.356;
+//     joint_group_positions[2] = 2.356;
+//     joint_group_positions[3] = -3.141;
+//     joint_group_positions[4] = -1.606;
+//     joint_group_positions[5] = 0; // Modify this for UR robot
+//     within_bounds = move_group.setJointValueTarget(joint_group_positions);
+//     if (!within_bounds)
+//     {
+//     RCLCPP_WARN(LOGGER, "Target joint position(s) were outside of limits, but will be clamped.");
+//     }
+
+//     move_group.setMaxVelocityScalingFactor(0.1);
+//     move_group.setMaxAccelerationScalingFactor(0.1);
+
+//     success = (move_group.plan(my_plan) == moveit::core::MoveItErrorCode::SUCCESS);
+//     RCLCPP_INFO(LOGGER, "Visualizing plan (joint-space goal) %s", success ? "" : "FAILED");
+
+//     visual_tools.deleteAllMarkers();
+//     visual_tools.publishText(text_pose, "Joint Space Goal", rvt::WHITE, rvt::XLARGE);
+//     visual_tools.publishTrajectoryLine(my_plan.trajectory_, joint_model_group);
+//     visual_tools.trigger();
+//     //visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo");
+
+//     move_group.move();
+
+//     geometry_msgs::msg::Pose target_pose2;
+//     target_pose2.position.x = 0.400;
+//     target_pose2.position.y = 0.546;
+//     target_pose2.position.z = 0.564;
+//     target_pose2.orientation.x = -0.706;
+//     target_pose2.orientation.y = 0.038;
+//     target_pose2.orientation.z = -0.012;
+//     target_pose2.orientation.w = 0.707;
+//     move_group.setPoseTarget(target_pose2);
+
+//     move_group.setMaxVelocityScalingFactor(0.1);
+//     move_group.setMaxAccelerationScalingFactor(0.1);
+
+//     RCLCPP_INFO(LOGGER, "Planning frame: %s", move_group.getPlanningFrame().c_str());
+//     success = (move_group.plan(my_plan) == moveit::core::MoveItErrorCode::SUCCESS);
+//     RCLCPP_INFO(LOGGER, "Visualizing plan (pose goal) %s", success ? "" : "FAILED");
+
+//     visual_tools.publishAxisLabeled(target_pose2, "pose1");
+//     visual_tools.publishText(text_pose, "Pose Goal", rvt::WHITE, rvt::XLARGE);
+//     visual_tools.publishTrajectoryLine(my_plan.trajectory_, joint_model_group);
+//     visual_tools.trigger();
+//     //visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo");
+
+//     move_group.move();
+
+//     current_state = move_group.getCurrentState(10);
+//     current_state->copyJointGroupPositions(joint_model_group, joint_group_positions);
+
+//     joint_group_positions[0] = 1.536;
+//     joint_group_positions[1] = -2.356;
+//     joint_group_positions[2] = 2.356;
+//     joint_group_positions[3] = -3.141;
+//     joint_group_positions[4] = -1.606;
+//     joint_group_positions[5] = 0; // Modify this for UR robot
+//     within_bounds = move_group.setJointValueTarget(joint_group_positions);
+//     if (!within_bounds)
+//     {
+//     RCLCPP_WARN(LOGGER, "Target joint position(s) were outside of limits, but will be clamped.");
+//     }
+
+//     move_group.setMaxVelocityScalingFactor(0.1);
+//     move_group.setMaxAccelerationScalingFactor(0.1);
+
+//     success = (move_group.plan(my_plan) == moveit::core::MoveItErrorCode::SUCCESS);
+//     RCLCPP_INFO(LOGGER, "Visualizing plan (joint-space goal) %s", success ? "" : "FAILED");
+
+//     visual_tools.deleteAllMarkers();
+//     visual_tools.publishText(text_pose, "Joint Space Goal", rvt::WHITE, rvt::XLARGE);
+//     visual_tools.publishTrajectoryLine(my_plan.trajectory_, joint_model_group);
+//     visual_tools.trigger();
+//     //visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo");
+
+//     move_group.move();
+
+//     geometry_msgs::msg::Pose target_pose3;
+//     target_pose3.position.x = -0.619;
+//     target_pose3.position.y = 0.494;
+//     target_pose3.position.z = 0.489;
+//     target_pose3.orientation.x = -0.706;
+//     target_pose3.orientation.y = 0.038;
+//     target_pose3.orientation.z = -0.012;
+//     target_pose3.orientation.w = 0.707;
+//     move_group.setPoseTarget(target_pose3);
+
+//     move_group.setMaxVelocityScalingFactor(0.1);
+//     move_group.setMaxAccelerationScalingFactor(0.1);
+
+//     RCLCPP_INFO(LOGGER, "Planning frame: %s", move_group.getPlanningFrame().c_str());
+//     success = (move_group.plan(my_plan) == moveit::core::MoveItErrorCode::SUCCESS);
+//     RCLCPP_INFO(LOGGER, "Visualizing plan (pose goal) %s", success ? "" : "FAILED");
+
+//     visual_tools.publishAxisLabeled(target_pose3, "pose1");
+//     visual_tools.publishText(text_pose, "Pose Goal", rvt::WHITE, rvt::XLARGE);
+//     visual_tools.publishTrajectoryLine(my_plan.trajectory_, joint_model_group);
+//     visual_tools.trigger();
+//     //visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo");
+
+//     move_group.move();
+
+//     current_state = move_group.getCurrentState(10);
+//     current_state->copyJointGroupPositions(joint_model_group, joint_group_positions);
+
+//     joint_group_positions[0] = 1.536;
+//     joint_group_positions[1] = -2.356;
+//     joint_group_positions[2] = 2.356;
+//     joint_group_positions[3] = -3.141;
+//     joint_group_positions[4] = -1.606;
+//     joint_group_positions[5] = 0; // Modify this for UR robot
+//     within_bounds = move_group.setJointValueTarget(joint_group_positions);
+//     if (!within_bounds)
+//     {
+//     RCLCPP_WARN(LOGGER, "Target joint position(s) were outside of limits, but will be clamped.");
+//     }
+
+//     move_group.setMaxVelocityScalingFactor(0.1);
+//     move_group.setMaxAccelerationScalingFactor(0.1);
+
+//     success = (move_group.plan(my_plan) == moveit::core::MoveItErrorCode::SUCCESS);
+//     RCLCPP_INFO(LOGGER, "Visualizing plan (joint-space goal) %s", success ? "" : "FAILED");
+
+//     visual_tools.deleteAllMarkers();
+//     visual_tools.publishText(text_pose, "Joint Space Goal", rvt::WHITE, rvt::XLARGE);
+//     visual_tools.publishTrajectoryLine(my_plan.trajectory_, joint_model_group);
+//     visual_tools.trigger();
+//     //visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo");
+
+//     move_group.move();
+
+//     geometry_msgs::msg::Pose target_pose4;
+//     target_pose4.position.x = 0.639;
+//     target_pose4.position.y = 0.494;
+//     target_pose4.position.z = 0.489;
+//     target_pose4.orientation.x = -0.706;
+//     target_pose4.orientation.y = 0.038;
+//     target_pose4.orientation.z = -0.012;
+//     target_pose4.orientation.w = 0.707;
+//     move_group.setPoseTarget(target_pose4);
+
+//     move_group.setMaxVelocityScalingFactor(0.1);
+//     move_group.setMaxAccelerationScalingFactor(0.1);
+
+//     RCLCPP_INFO(LOGGER, "Planning frame: %s", move_group.getPlanningFrame().c_str());
+//     success = (move_group.plan(my_plan) == moveit::core::MoveItErrorCode::SUCCESS);
+//     RCLCPP_INFO(LOGGER, "Visualizing plan (pose goal) %s", success ? "" : "FAILED");
+
+//     visual_tools.publishAxisLabeled(target_pose4, "pose1");
+//     visual_tools.publishText(text_pose, "Pose Goal", rvt::WHITE, rvt::XLARGE);
+//     visual_tools.publishTrajectoryLine(my_plan.trajectory_, joint_model_group);
+//     visual_tools.trigger();
+//     //visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo");
+
+//     move_group.move();

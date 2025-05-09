@@ -258,6 +258,24 @@ def launch_setup(context, *args, **kwargs):
         output="screen",
     )
 
+    end_effector_node = Node(
+        package='moving_ur5',  # Replace with your package name
+        executable='move_group_interface_ur_manipulator',  # Replace with your node's executable name
+        output='screen',
+        parameters=[
+            robot_description,
+            robot_description_semantic,
+            publish_robot_description_semantic,
+            robot_description_kinematics,
+            robot_description_planning,
+            ompl_planning_pipeline_config,
+            trajectory_execution,
+            moveit_controllers,
+            planning_scene_monitor_parameters,
+            {"use_sim_time": use_sim_time},
+            warehouse_ros_config,
+        ],
+    )
     end_effector_node_2 = Node(
         package='moving_ur5',  # Replace with your package name
         executable='move_group_reciever',  # Replace with your node's executable name

@@ -459,7 +459,7 @@
       <parent link="${tf_prefix}flange"/>
       <child link="${tf_prefix}tool0"/>
     </joint>
-    <!-- custom accomodation for gripper -->
+
     <link name="virtual_jaw_edge"/>
     <joint name="Virtual_jaw_joint" type="fixed">
         <parent link="${tf_prefix}tool0"/>

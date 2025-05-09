@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>automated_fhr_pipeline</name>
+  <version>0.0.0</version>
+  <description>TODO: Package description</description>
+  <maintainer email="sarmad.ahmed11@gmail.com">sarmadahmad8</maintainer>
+  <license>TODO: License declaration</license>
+
+  <depend>rclpy</depend>
+
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+    <exec_depend>launch</exec_depend>
+    <exec_depend>launch_ros</exec_depend>
+    <exec_depend>ament_index_python</exec_depend>
+    <exec_depend>launch_substitutions</exec_depend>
+    <exec_depend>detection_publishers</exec_depend>
+    <exec_depend>detection_recievers</exec_depend>
+    <exec_depend>robotiq_2f_urcap_adapter</exec_depend>
+    <exec_depend>ur_robot_driver</exec_depend>
+    <exec_depend>ur_moveit_config</exec_depend>
+    <launch>
+      <file>launch/background.launch.py</file>
+      <file>launch/active.launch.py</file>
+    </launch>
+  </export>
+</package>

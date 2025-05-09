@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'detection_publisher'
+package_name = 'detection_publishers'
 
 setup(
     name=package_name,
@@ -11,23 +11,17 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
     ],
-    install_requires=[
-        'setuptools',
-        'opencv-python',
-        'inference-gpu==0.16.3',
-        'numpy==1.26.4',
-        'cython==3.0.0',
-        'pyzed==4.2'
-    ],
+    install_requires=['setuptools'],
     zip_safe=True,
     maintainer='sarmadahmad8',
-    maintainer_email='sarmadahmad8@todo.todo',
+    maintainer_email='sarmad.ahmed11@gmail.com',
     description='TODO: Package description',
     license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "move_group_publisher = detection_publisher.move_group_publisher:main"
+            "manual_detection_publisher = detection_publishers.manual_detection_publisher:main",
+            "automatic_detection_publisher = detection_publishers.automatic_detection_publisher:main"
         ],
     },
 )
