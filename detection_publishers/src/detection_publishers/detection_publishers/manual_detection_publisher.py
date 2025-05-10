@@ -126,8 +126,8 @@ class move_group_publisher(Node):
         self.timer = self.create_timer(0.067, self.detect_fruit_callback)
 
         # Initialize the Roboflow model
-        #self.model = get_model(model_id="fruit-detector-n9ajo/2", api_key="DrB6AbeqwlipTFnq48tb")
-        #self.model = get_model(model_id="lemon_kumquat_robust/5", api_key="DrB6AbeqwlipTFnq48tb") 
+        #self.model = get_model(model_id="fruit-detector-n9ajo/2", api_key="*************")
+        #self.model = get_model(model_id="lemon_kumquat_robust/5", api_key="*************") 
         # Initialize ZED camera
         self.zed = sl.Camera()
         init_params = sl.InitParameters()
